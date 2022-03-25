@@ -15,53 +15,17 @@ import {
 } from '@chakra-ui/react';
 import Task from '../components/Task';
 import Todo from '../model/Todo';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { add, done, remove } from '../redux/slices/todoSlice';
-import { makeId } from '../lib/stringUtils';
+import useTodo from '../hooks/useTodo';
 
 const Home: NextPage = () => {
-  const dispatch = useAppDispatch();
-  const todos = useAppSelector(state => state.todo);
+  const {
+    todos,
+    handleAdd,
+    handleComplete,
+    handleRemove
+  } = useTodo();
   const { toggleColorMode } = useColorMode();
   const boxColorBox = useColorModeValue('gray.200', 'gray.700');
-
-  /*
-    EDICION SI ES QUE LO PONGO
-
-    const editedTodo = todos.filter(todo => todo.id === taskId)[0];
-    editedTodo.name =
-    dispatch(edit({
-      id: taskId,
-      todo: editedTodo
-    }));
-  */
-
-  const handleComplete = (taskId: string) => {
-    dispatch(done(taskId));
-  }
-
-  const handleDelete = (taskId: string) => {
-    dispatch(remove(taskId));
-  }
-
-  const handleAdd = () => {
-    let todoId = "";
-    let repeatedTodo = [];
-    do {
-      todoId = makeId(8);
-      repeatedTodo = todos.filter(item => item.id === todoId);
-    } while ( repeatedTodo.length > 0 )
-
-    const todo: Todo = {
-      id: todoId,
-      title: "",
-      description: "",
-      isDone: false,
-      date: new Date()
-    }
-
-    dispatch(add(todo));
-  }
 
   return (
     <Container>
@@ -89,7 +53,7 @@ const Home: NextPage = () => {
                 key={item.id}
                 todo={item} 
                 handleComplete={handleComplete} 
-                handleDelete={handleDelete} 
+                handleRemove={handleRemove} 
               />
             )}
           </Stack>
