@@ -14,7 +14,7 @@ const todoSlice = createSlice({
     done: (state, action: PayloadAction<string>) => 
       state.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo),
     edit: (state, action: PayloadAction<EditTodoPayload>) => 
-      state.map(todo => todo.id === action.payload.id ? action.payload.todo : todo),
+      state.map(todo => todo.id === action.payload.id ? { ...todo, title: action.payload.title, description: action.payload.description } : todo),
     setTodos: (state, action: PayloadAction<Todo[]>) => 
       [...action.payload],
   },
@@ -24,7 +24,8 @@ export const { add, remove, done, edit, setTodos } = todoSlice.actions;
 export const selectTodos = (state: RootState) => state.todo;
 export type EditTodoPayload = {
   id: string;
-  todo: Todo;
+  title: string;
+  description: string;
 }
 export default todoSlice.reducer;
 

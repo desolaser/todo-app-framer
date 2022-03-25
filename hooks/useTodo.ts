@@ -1,13 +1,9 @@
+
+import { useFormik } from 'formik';
 import Todo from '../model/Todo';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { add, edit, done, remove } from '../redux/slices/todoSlice';
 import { makeId } from '../lib/stringUtils';
-import { useFormik } from 'formik';
-
-type AddFormErrors = {
-  title: string,
-  description: string
-};
 
 const useTodo = () => {
   const dispatch = useAppDispatch();
@@ -19,15 +15,15 @@ const useTodo = () => {
     },
     validate: values => { 
       let errors = {};
+
       if (!values.title)
         errors = { title: "El titulo es obligatorio" };
       if (!values.description)
         errors = { ...errors, description: "La descripción es obligatoria" };
+
       return errors;
     },
     onSubmit: values => {
-      console.log(values)
-
       const todo: Todo = {
         id: generateUniqueId(),
         title: values.title,
@@ -39,21 +35,17 @@ const useTodo = () => {
       dispatch(add(todo));
     },
   });
-
-  const handleEdit = (taskId: string): void => {
-    const editedTodo = todos.filter(todo => todo.id === taskId)[0];
-    dispatch(edit({
-      id: taskId,
-      todo: editedTodo
-    }));
-  }
-
+ 
   const handleComplete = (taskId: string): void => {
     dispatch(done(taskId));
   }
 
   const handleRemove = (taskId: string): void => {
     dispatch(remove(taskId));
+  }
+
+  const handleEdit = (id: string, title: string, description: string) => {    
+    dispatch(edit({ id, title, description }));
   }
 
   const generateUniqueId = (): string => {
