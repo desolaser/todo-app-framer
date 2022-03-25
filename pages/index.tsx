@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { 
+  Button,
   Container, 
   Box, 
   Heading, 
@@ -15,14 +16,14 @@ import {
 import Task from '../components/Task';
 import Todo from '../model/Todo';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { done, remove } from '../redux/slices/todoSlice';
+import { add, done, remove } from '../redux/slices/todoSlice';
+import { makeId } from '../lib/stringUtils';
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector(state => state.todo);
   const { toggleColorMode } = useColorMode();
   const boxColorBox = useColorModeValue('gray.200', 'gray.700');
-  const boxColorItem = useColorModeValue('gray.300', 'gray.600');
 
   /*
     EDICION SI ES QUE LO PONGO
@@ -35,12 +36,31 @@ const Home: NextPage = () => {
     }));
   */
 
-  const handleComplete = (taskId: number) => {
+  const handleComplete = (taskId: string) => {
     dispatch(done(taskId));
   }
 
-  const handleDelete = (taskId: number) => {
+  const handleDelete = (taskId: string) => {
     dispatch(remove(taskId));
+  }
+
+  const handleAdd = () => {
+    let todoId = "";
+    let repeatedTodo = [];
+    do {
+      todoId = makeId(8);
+      repeatedTodo = todos.filter(item => item.id === todoId);
+    } while ( repeatedTodo.length > 0 )
+
+    const todo: Todo = {
+      id: todoId,
+      title: "",
+      description: "",
+      isDone: false,
+      date: new Date()
+    }
+
+    dispatch(add(todo));
   }
 
   return (
@@ -56,7 +76,12 @@ const Home: NextPage = () => {
         <Switch p="2rem" id='color-mode' onChange={toggleColorMode} />
       </Flex>
       <Box>
-        <Input mb="1rem" placeholder='Basic usage' />
+        <Flex spacing={4}>
+          <Input mb="1rem" placeholder='Insert text' />
+          <Button colorScheme={'blue'} onClick={_ => handleAdd()}>
+            Agregar
+          </Button>
+        </Flex>
         <Box p="1rem" bg={boxColorBox} rounded="xl">
           <Stack spacing={3}>
             {todos.map((item: Todo) => 

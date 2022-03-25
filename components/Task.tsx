@@ -10,8 +10,8 @@ import Todo from '../model/Todo';
 
 interface TaskProps {
   todo: Todo,
-  handleComplete: (taskId: number) => void,
-  handleDelete: (taskId: number) => void
+  handleComplete: (taskId: string) => void,
+  handleDelete: (taskId: string) => void
 };
 
 const Task: FunctionComponent<TaskProps> = ({ todo, handleComplete, handleDelete }) => {
