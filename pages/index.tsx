@@ -1,58 +1,46 @@
-import type { NextPage } from 'next'
-import { useState } from 'react'
-import Head from 'next/head'
+import type { NextPage } from 'next';
+import Head from 'next/head';
 import { 
   Container, 
   Box, 
   Heading, 
-  Text, 
   Stack, 
-  Button, 
   Input, 
   Flex,
   Spacer,
   Switch,
   useColorMode, 
   useColorModeValue, 
-} from '@chakra-ui/react'
-import Task from '../components/Task'
-
-interface IData {
-  id: string,
-  title: string,
-  description: string
-}
-
-const dummyData = [
-  {
-    id: '1',
-    title: 'Task 1',
-    description: 'blablablablablablabla 1'
-  },
-  {
-    id: '2',
-    title: 'Task 2',
-    description: 'blablablablablablabla 2'
-  },
-  {
-    id: '3',
-    title: 'Task 3',
-    description: 'blablablablablablabla 3'
-  },
-]
+} from '@chakra-ui/react';
+import Task from '../components/Task';
+import Todo from '../model/Todo';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { done, remove } from '../redux/slices/todoSlice';
 
 const Home: NextPage = () => {
-  const [data, setData] = useState(dummyData)
-  const { colorMode, toggleColorMode } = useColorMode()
-  const boxColorBox = useColorModeValue('gray.200', 'gray.700')
-  const boxColorItem = useColorModeValue('gray.300', 'gray.600')
+  const dispatch = useAppDispatch();
+  const todos = useAppSelector(state => state.todo);
+  const { toggleColorMode } = useColorMode();
+  const boxColorBox = useColorModeValue('gray.200', 'gray.700');
+  const boxColorItem = useColorModeValue('gray.300', 'gray.600');
 
-  const handleComplete = () => {
-    
+  /*
+    EDICION SI ES QUE LO PONGO
+
+    const editedTodo = todos.filter(todo => todo.id === taskId)[0];
+    editedTodo.name =
+    dispatch(edit({
+      id: taskId,
+      todo: editedTodo
+    }));
+  */
+
+  const handleComplete = (taskId: number) => {
+    dispatch(done(taskId));
   }
 
-  const handleDelete = () => {
-    
+  const handleDelete = (taskId: number) => {
+    dispatch(remove(taskId));
   }
 
   return (
@@ -71,11 +59,10 @@ const Home: NextPage = () => {
         <Input mb="1rem" placeholder='Basic usage' />
         <Box p="1rem" bg={boxColorBox} rounded="xl">
           <Stack spacing={3}>
-            {data.map(item => 
+            {todos.map((item: Todo) => 
               <Task 
-                id={item.id} 
-                title={item.title} 
-                description={item.description} 
+                key={item.id}
+                todo={item} 
                 handleComplete={handleComplete} 
                 handleDelete={handleDelete} 
               />
@@ -84,7 +71,7 @@ const Home: NextPage = () => {
         </Box>
       </Box>      
     </Container>
-  )
+  );
 }
 
-export default Home
+export default Home;
