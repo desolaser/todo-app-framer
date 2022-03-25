@@ -63,20 +63,22 @@ const Home: NextPage = () => {
           <Button colorScheme={'blue'} type="submit" w="full" mb="1rem">
             Agregar
           </Button>
-        </form>  
-        <Box p="1rem" bg={boxColorBox} rounded="xl">
-          <Stack spacing={3}>
-            {todos.map((item: Todo) => 
-              <Task 
-                key={item.id}
-                todo={item} 
-                handleComplete={handleComplete} 
-                handleRemove={handleRemove} 
-              />
-            )}
-          </Stack>
-        </Box>
-      </Box>      
+        </form>
+        {todos.length > 0 && (
+          <Box p="1rem" bg={boxColorBox} rounded="xl">
+            <Stack spacing={3}>
+              {todos.map((item: Todo) => 
+                <Task 
+                  key={item.id}
+                  todo={item} 
+                  handleComplete={handleComplete} 
+                  handleRemove={handleRemove} 
+                />
+              )}
+            </Stack>
+          </Box>
+        )}        
+      </Box>
     </Container>
   );
 }
