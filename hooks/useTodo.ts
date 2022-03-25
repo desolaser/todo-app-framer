@@ -17,6 +17,14 @@ const useTodo = () => {
       title: '',
       description: ''
     },
+    validate: values => { 
+      let errors = {};
+      if (!values.title)
+        errors = { title: "El titulo es obligatorio" };
+      if (!values.description)
+        errors = { ...errors, description: "La descripción es obligatoria" };
+      return errors;
+    },
     onSubmit: values => {
       console.log(values)
 
