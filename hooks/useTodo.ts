@@ -2,10 +2,35 @@ import Todo from '../model/Todo';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { add, edit, done, remove } from '../redux/slices/todoSlice';
 import { makeId } from '../lib/stringUtils';
+import { useFormik } from 'formik';
+
+type AddFormErrors = {
+  title: string,
+  description: string
+};
 
 const useTodo = () => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector(state => state.todo);
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      description: ''
+    },
+    onSubmit: values => {
+      console.log(values)
+
+      const todo: Todo = {
+        id: generateUniqueId(),
+        title: values.title,
+        description: values.description,
+        isDone: false,
+        date: new Date()
+      }
+  
+      dispatch(add(todo));
+    },
+  });
 
   const handleEdit = (taskId: string): void => {
     const editedTodo = todos.filter(todo => todo.id === taskId)[0];
@@ -23,18 +48,6 @@ const useTodo = () => {
     dispatch(remove(taskId));
   }
 
-  const handleAdd = (): void => {
-    const todo: Todo = {
-      id: generateUniqueId(),
-      title: "",
-      description: "",
-      isDone: false,
-      date: new Date()
-    }
-
-    dispatch(add(todo));
-  }
-
   const generateUniqueId = (): string => {
     let todoId: string = "";
     let repeatedTodo: Todo[] = [];
@@ -47,7 +60,7 @@ const useTodo = () => {
 
   return {
     todos,
-    handleAdd,
+    formik,
     handleComplete,
     handleRemove,
     handleEdit

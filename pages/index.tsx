@@ -6,7 +6,10 @@ import {
   Box, 
   Heading, 
   Stack, 
+  FormControl,
   Input, 
+  Textarea,
+  VStack,
   Flex,
   Spacer,
   Switch,
@@ -20,7 +23,7 @@ import useTodo from '../hooks/useTodo';
 const Home: NextPage = () => {
   const {
     todos,
-    handleAdd,
+    formik,
     handleComplete,
     handleRemove
   } = useTodo();
@@ -40,12 +43,27 @@ const Home: NextPage = () => {
         <Switch p="2rem" id='color-mode' onChange={toggleColorMode} />
       </Flex>
       <Box>
-        <Flex spacing={4}>
-          <Input mb="1rem" placeholder='Insert text' />
-          <Button colorScheme={'blue'} onClick={_ => handleAdd()}>
+        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+          <FormControl mb="1rem">
+            <Input 
+              placeholder="Insert text"
+              name="title"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+            />
+          </FormControl>
+          <FormControl mb="1rem">
+            <Textarea 
+              placeholder="Insert description"
+              name="description"
+              value={formik.values.description}
+              onChange={formik.handleChange}
+            />
+          </FormControl>
+          <Button colorScheme={'blue'} type="submit" w="full" mb="1rem">
             Agregar
           </Button>
-        </Flex>
+        </form>  
         <Box p="1rem" bg={boxColorBox} rounded="xl">
           <Stack spacing={3}>
             {todos.map((item: Todo) => 
