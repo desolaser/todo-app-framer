@@ -1,59 +1,34 @@
-import type { NextPage } from 'next'
-import { useState } from 'react'
-import Head from 'next/head'
+import type { NextPage } from 'next';
+import Head from 'next/head';
 import { 
+  Button,
   Container, 
   Box, 
   Heading, 
-  Text, 
   Stack, 
-  Button, 
+  FormControl,
+  FormErrorMessage,
   Input, 
+  Textarea,
   Flex,
   Spacer,
   Switch,
   useColorMode, 
   useColorModeValue, 
-} from '@chakra-ui/react'
-import Task from '../components/Task'
-
-interface IData {
-  id: string,
-  title: string,
-  description: string
-}
-
-const dummyData = [
-  {
-    id: '1',
-    title: 'Task 1',
-    description: 'blablablablablablabla 1'
-  },
-  {
-    id: '2',
-    title: 'Task 2',
-    description: 'blablablablablablabla 2'
-  },
-  {
-    id: '3',
-    title: 'Task 3',
-    description: 'blablablablablablabla 3'
-  },
-]
+} from '@chakra-ui/react';
+import Task from '../components/Task';
+import Todo from '../model/Todo';
+import useTodo from '../hooks/useTodo';
 
 const Home: NextPage = () => {
-  const [data, setData] = useState(dummyData)
-  const { colorMode, toggleColorMode } = useColorMode()
-  const boxColorBox = useColorModeValue('gray.200', 'gray.700')
-  const boxColorItem = useColorModeValue('gray.300', 'gray.600')
-
-  const handleComplete = () => {
-    
-  }
-
-  const handleDelete = () => {
-    
-  }
+  const {
+    todos,
+    formik,
+    handleComplete,
+    handleRemove
+  } = useTodo();
+  const { toggleColorMode } = useColorMode();
+  const boxColorBox = useColorModeValue('gray.200', 'gray.700');
 
   return (
     <Container>
@@ -68,23 +43,48 @@ const Home: NextPage = () => {
         <Switch p="2rem" id='color-mode' onChange={toggleColorMode} />
       </Flex>
       <Box>
-        <Input mb="1rem" placeholder='Basic usage' />
-        <Box p="1rem" bg={boxColorBox} rounded="xl">
-          <Stack spacing={3}>
-            {data.map(item => 
-              <Task 
-                id={item.id} 
-                title={item.title} 
-                description={item.description} 
-                handleComplete={handleComplete} 
-                handleDelete={handleDelete} 
-              />
-            )}
-          </Stack>
-        </Box>
-      </Box>      
+        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+          <FormControl mb="1rem" isInvalid={'title' in formik.errors}>
+            <Input 
+              placeholder="Insert text"
+              name="title"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+            />
+            {'title' in formik.errors && 
+              <FormErrorMessage>{formik.errors.title}</FormErrorMessage>}            
+          </FormControl>
+          <FormControl mb="1rem" isInvalid={'description' in formik.errors}>
+            <Textarea 
+              placeholder="Insert description"
+              name="description"
+              value={formik.values.description}
+              onChange={formik.handleChange}
+            />
+            {'description' in formik.errors && 
+              <FormErrorMessage>{formik.errors.description}</FormErrorMessage>}
+          </FormControl>
+          <Button colorScheme={'blue'} type="submit" w="full" mb="1rem">
+            Agregar
+          </Button>
+        </form>
+        {todos.length > 0 && (
+          <Box p="1rem" bg={boxColorBox} rounded="xl">
+            <Stack spacing={3}>
+              {todos.map((item: Todo) => 
+                <Task 
+                  key={item.id}
+                  todo={item} 
+                  handleComplete={handleComplete} 
+                  handleRemove={handleRemove} 
+                />
+              )}
+            </Stack>
+          </Box>
+        )}        
+      </Box>
     </Container>
-  )
+  );
 }
 
-export default Home
+export default Home;

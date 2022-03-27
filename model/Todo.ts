@@ -1,5 +1,5 @@
-type Todo = {
-  id: number,
+interface Todo {
+  id: string,
   title: string,
   description: string,
   isDone: boolean,
