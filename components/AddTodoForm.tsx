@@ -47,7 +47,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
     )
   } else {
     return (
-      <HStack bg={formColorBox} spacing={4} borderRadius=".5rem" justify="space-between" w="full">
+      <HStack bg={formColorBox} spacing={4} p={2} borderRadius=".5rem" justify="space-between" w="full">
         <Box>
           Añada una tarea
         </Box>
