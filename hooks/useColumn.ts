@@ -42,7 +42,7 @@ const useColumn = () => {
   const getOrderedColumns = () => {
     return columnOrder.map((columnId: string) => {
       const column: Column = columns.filter(column => column.id == columnId)[0];
-      const todosList: Todo[] = column.todoIds.map(todoId => todos.filter(todo => todo.id = todoId)[0] )
+      const todosList: Todo[] = column.todoIds.map(todoId => todos.filter(todo => todo.id === todoId)[0] )
 
       return {
         column,

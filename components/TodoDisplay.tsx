@@ -33,7 +33,7 @@ const Task: React.FC<TaskProps> = ({ todo, columnId }) => {
   }
 
   return (
-    <Box p="1rem" bg={boxColorItem} rounded="xl">
+    <Box p="1rem" bg={boxColorItem}>
       {!editMode ? (
         <HStack mb="1rem" spacing={8} justify="space-between">
           <VStack spacing={0} align="flex-start">
