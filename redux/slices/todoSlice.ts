@@ -41,24 +41,28 @@ const todoSlice = createSlice({
       if (typeof column === "undefined") {
         return
       }
-      state.todos = state.todos.filter(todo => todo.id != todoId) 
+      state.todos = state.todos.filter(todo => todo.id != todoId)
       column.todoIds = column.todoIds.filter(id => id != todoId)
     },
-    done: (state, action: PayloadAction<string>) => 
-      { state.todos = state.todos.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo) },      
-    edit: (state, action: PayloadAction<EditTodoPayload>) => { 
-      state.todos = state.todos.map(todo => todo.id === action.payload.id ? { 
+    done: (state, action: PayloadAction<string>) =>
+      { state.todos = state.todos.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo) },     
+    edit: (state, action: PayloadAction<EditTodoPayload>) => {
+      state.todos = state.todos.map(todo => todo.id === action.payload.id ? {
         ...todo, 
         title: action.payload.title, 
         description: action.payload.description 
       } : todo)
     },
-    addColumn: ({ columns }, action: PayloadAction<Column>) => 
-      { columns.push(action.payload) },
-    editColumn: ({ columns }, action: PayloadAction<EditColumnPayload>) => 
+    addColumn: ({ columns, columnOrder }, action: PayloadAction<Column>) => {
+      columns.push(action.payload)
+      columnOrder.push(action.payload.id)
+    },
+    editColumn: ({ columns }, action: PayloadAction<EditColumnPayload>) =>
       { columns = columns.map(column => column.id == action.payload.columnId ? { ...column, title: action.payload.title } : column) },
-    removeColumn: ({ columns }, action: PayloadAction<string>) => 
-      { columns = columns.filter(column => column.id != action.payload)},
+    removeColumn: ({ columns, columnOrder }, action: PayloadAction<string>) => {
+      columns = columns.filter(column => column.id != action.payload)
+      columnOrder = columnOrder.filter(columnId => columnId != action.payload)
+    },
   },
 });
 

@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 import todoReducer from './slices/todoSlice';
 // ...
 const store = configureStore({
