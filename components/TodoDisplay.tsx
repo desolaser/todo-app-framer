@@ -15,8 +15,8 @@ import {
   EditIcon
 } from '@chakra-ui/icons';
 import Todo from '../model/Todo';
-import EditTaskForm from './EditTaskForm';
 import useTodo from '../hooks/useTodo';
+import EditTaskForm from './EditTaskForm';
 
 interface TaskProps {
   todo: Todo,

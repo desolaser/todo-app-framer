@@ -12,18 +12,18 @@ import {
 import { PlusSquareIcon, CloseIcon } from '@chakra-ui/icons';
 import useTodo from '../hooks/useTodo';
 
-interface AddTaskFormProps {
+interface AddTodoFormProps {
   columnId: string
 }
 
-const AddTaskForm: React.FC<AddTaskFormProps> = ({ columnId }) => {
+const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
   const { addTodoForm } = useTodo(columnId);
   const [ addMode, setAddMode ] = useState<boolean>(false);
   const formColorBox = useColorModeValue('gray.100', 'gray.700');
 
   if (addMode) {
     return (
-      <Box bg={formColorBox} p={4} borderRadius=".5rem">
+      <Box bg={formColorBox} borderRadius=".5rem">
         <form onSubmit={addTodoForm.handleSubmit}>
           <FormControl mb="1rem" isInvalid={'title' in addTodoForm.errors}>
             <Textarea 
@@ -47,9 +47,9 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ columnId }) => {
     )
   } else {
     return (
-      <HStack bg={formColorBox} spacing={4} p={4} borderRadius=".5rem">
+      <HStack bg={formColorBox} spacing={4} borderRadius=".5rem">
         <Box>
-          Añada una columna
+          Añada una tarea
         </Box>
         <IconButton aria-label='Add card button' icon={<PlusSquareIcon />} onClick={() => setAddMode(!addMode)} />
       </HStack>
@@ -57,4 +57,4 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ columnId }) => {
   }
 }
 
-export default AddTaskForm;
+export default AddTodoForm;
