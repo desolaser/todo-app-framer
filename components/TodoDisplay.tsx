@@ -36,8 +36,10 @@ const Task: React.FC<TaskProps> = ({ todo, columnId }) => {
     <Box p="1rem" bg={boxColorItem} maxWidth="xs" minWidth="xs">
       {!editMode ? (
         <HStack mb="1rem" spacing={8} justify="space-between">
-          <VStack spacing={0} align="flex-start">
-            <Heading size="lg" mb={1}>{todo.title}</Heading>            
+          <VStack spacing={2} align="flex-start">
+            <Text noOfLines={3} style={{ textOverflow: "ellipsis" }} maxWidth="xs">
+              {todo.title}
+            </Text>          
             <Text fontSize='lg'>
               {todo.description}
             </Text>    

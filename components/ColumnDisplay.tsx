@@ -25,7 +25,7 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
   return (
     <Box p="1rem" bg={boxColorBox} rounded="lg" minWidth="xs">
       <HStack justify="space-between" mb="1rem">
-        <Text noOfLines={3} style={{ textOverflow: "ellipsis" }} maxWidth="xs">
+        <Text style={{ textOverflow: "ellipsis" }} isTruncated maxWidth="xs">
           {column.title}
         </Text>
         <IconButton       
