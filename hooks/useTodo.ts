@@ -57,7 +57,7 @@ const useTodo = (columnId: string) => {
       todoId = makeId(8);
       repeatedTodo = todos.filter(item => item.id === todoId);
     } while ( repeatedTodo.length > 0 )
-    return todoId;
+    return `todo-${todoId}`;
   }
 
   return {

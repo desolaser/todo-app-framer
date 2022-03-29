@@ -26,7 +26,7 @@ const useColumn = () => {
         title: values.title,
         todoIds: []
       }
-  
+      
       dispatch(addColumn(column));
     },
   });
@@ -52,13 +52,13 @@ const useColumn = () => {
   }
 
   const generateUniqueId = (): string => {
-    let todoId: string = "";
+    let columnId: string = "";
     let repeatedColumn: Column[] = [];
     do {
-      todoId = makeId(8);
-      repeatedColumn = columns.filter(item => item.id === todoId);
+      columnId = makeId(8);
+      repeatedColumn = columns.filter(item => item.id === columnId);
     } while ( repeatedColumn.length > 0 )
-    return todoId;
+    return `column-${columnId}`;
   }
 
   return {

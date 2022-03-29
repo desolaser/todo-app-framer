@@ -13,14 +13,29 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     if (destination.index === source.index && destination.droppableId === source.droppableId) 
       return;
+    
+    if (
+      source.droppableId.startsWith('column') && destination.droppableId.startsWith('todo') ||
+      source.droppableId.startsWith('todo') && destination.droppableId.startsWith('column')
+    ) {
+      return;
+    }
 
-    store.dispatch({ type: 'todo/swapTodo', payload: {
-      todoId: draggableId,
-      sourceColumnId: source.droppableId, 
-      destinationColumnId: destination.droppableId, 
-      sourceIndex: source.index, 
-      destinationIndex: destination.index
-    }})
+    if (draggableId.startsWith('column')) {      
+      store.dispatch({ type: 'todo/swapColumn', payload: {
+        todoId: draggableId,
+        sourceIndex: source.index, 
+        destinationIndex: destination.index
+      }})
+    } else {
+      store.dispatch({ type: 'todo/swapTodo', payload: {
+        todoId: draggableId,
+        sourceColumnId: source.droppableId, 
+        destinationColumnId: destination.droppableId, 
+        sourceIndex: source.index, 
+        destinationIndex: destination.index
+      }})
+    }
   }
 
   return (

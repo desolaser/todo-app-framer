@@ -26,6 +26,12 @@ type SwapTodoPayload = {
   destinationIndex: number
 }
 
+type SwapColumnPayload = {
+  columnId: string,
+  sourceIndex: number, 
+  destinationIndex: number
+}
+
 const todoSlice = createSlice({
   name: 'todo',
   initialState: {
@@ -85,6 +91,12 @@ const todoSlice = createSlice({
 
       sourceColumn.todoIds.splice(sourceIndex, 1);
       destinationColumn.todoIds.splice(destinationIndex, 0, todoId);
+    },
+    swapColumn: (state, action: PayloadAction<SwapColumnPayload>) => {
+      const { columnId, sourceIndex, destinationIndex } = action.payload;
+
+      state.columnOrder.splice(sourceIndex, 1);
+      state.columnOrder.splice(destinationIndex, 0, columnId);
     }
   },
 });

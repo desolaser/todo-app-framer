@@ -20,7 +20,7 @@ interface ColumnProps {
   todos: Todo[]
 };
 
-const Task: React.FC<ColumnProps> = ({ column, todos }) => {
+const ColumnDisplay: React.FC<ColumnProps> = ({ column, todos }) => {
   const { handleRemove } = useColumn();
   const boxColor = useColorModeValue('gray.200', 'gray.700');
   const boxDragginOverColor = useColorModeValue('blue.300', 'blue.200');
@@ -63,4 +63,4 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
   );
 }
 
-export default Task;
+export default ColumnDisplay;
