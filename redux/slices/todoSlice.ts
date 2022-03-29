@@ -13,6 +13,11 @@ type RemovePayload = {
   columnId: string
 }
 
+type EditColumnPayload = {
+  columnId: string,
+  title: string
+}
+
 const todoSlice = createSlice({
   name: 'todo',
   initialState: {
@@ -47,11 +52,17 @@ const todoSlice = createSlice({
         title: action.payload.title, 
         description: action.payload.description 
       } : todo)
-    }
+    },
+    addColumn: ({ columns }, action: PayloadAction<Column>) => 
+      { columns.push(action.payload) },
+    editColumn: ({ columns }, action: PayloadAction<EditColumnPayload>) => 
+      { columns = columns.map(column => column.id == action.payload.columnId ? { ...column, title: action.payload.title } : column) },
+    removeColumn: ({ columns }, action: PayloadAction<string>) => 
+      { columns = columns.filter(column => column.id != action.payload)},
   },
 });
 
-export const { add, remove, done, edit } = todoSlice.actions;
+export const { add, remove, done, edit, addColumn, editColumn, removeColumn } = todoSlice.actions;
 export const selectTodos = (state: RootState) => state.todo;
 export type EditTodoPayload = {
   id: string;
