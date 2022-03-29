@@ -59,10 +59,11 @@ const todoSlice = createSlice({
     },
     editColumn: ({ columns }, action: PayloadAction<EditColumnPayload>) =>
       { columns = columns.map(column => column.id == action.payload.columnId ? { ...column, title: action.payload.title } : column) },
-    removeColumn: ({ columns, columnOrder }, action: PayloadAction<string>) => {
-      columns = columns.filter(column => column.id != action.payload)
-      columnOrder = columnOrder.filter(columnId => columnId != action.payload)
-    },
+    removeColumn: (state, action: PayloadAction<string>) => ({
+      ...state,
+      columns: state.columns.filter(column => column.id != action.payload),
+      columnOrder: state.columnOrder.filter(columnId => columnId != action.payload)
+    }),
   },
 });
 

@@ -19,7 +19,7 @@ const AddColumnForm: React.FC = () => {
 
   if (addMode) {
     return (
-      <Box bg={formColorBox} p={4} borderRadius=".5rem">
+      <Box bg={formColorBox} p={4} borderRadius=".5rem" minWidth="xs">
         <form onSubmit={addColumnForm.handleSubmit}>
           <FormControl mb="1rem" isInvalid={'title' in addColumnForm.errors}>
             <Textarea 
@@ -32,7 +32,7 @@ const AddColumnForm: React.FC = () => {
             {'title' in addColumnForm.errors && 
               <FormErrorMessage>{addColumnForm.errors.title}</FormErrorMessage>}            
           </FormControl>
-          <HStack>
+          <HStack justify="space-between">
             <Button colorScheme={'blue'} type="submit" w="full">
               Agregar
             </Button>
@@ -43,7 +43,12 @@ const AddColumnForm: React.FC = () => {
     )
   } else {
     return (
-      <HStack bg={formColorBox} spacing={4} p={4} borderRadius=".5rem">
+      <HStack 
+        bg={formColorBox} 
+        spacing={4} p={4} borderRadius=".5rem" 
+        minWidth="xs" maxWidth="xs"
+        justify="space-between"
+      >
         <Box>
           Añada una columna
         </Box>

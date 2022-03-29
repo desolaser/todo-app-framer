@@ -33,7 +33,7 @@ const Task: React.FC<TaskProps> = ({ todo, columnId }) => {
   }
 
   return (
-    <Box p="1rem" bg={boxColorItem}>
+    <Box p="1rem" bg={boxColorItem} maxWidth="xs" minWidth="xs">
       {!editMode ? (
         <HStack mb="1rem" spacing={8} justify="space-between">
           <VStack spacing={0} align="flex-start">
@@ -56,7 +56,7 @@ const Task: React.FC<TaskProps> = ({ todo, columnId }) => {
           icon={todo.isDone ? <CloseIcon/> : <CheckIcon />}
         />
         <HStack spacing={4}>
-          <IconButton       
+          <IconButton
             size='md'
             onClick={_ => handleRemove(todo.id)}
             colorScheme='red'

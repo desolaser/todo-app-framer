@@ -23,7 +23,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
 
   if (addMode) {
     return (
-      <Box bg={formColorBox} borderRadius=".5rem">
+      <Box bg={formColorBox} borderRadius=".5rem" w="full">
         <form onSubmit={addTodoForm.handleSubmit}>
           <FormControl mb="1rem" isInvalid={'title' in addTodoForm.errors}>
             <Textarea 
@@ -47,7 +47,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
     )
   } else {
     return (
-      <HStack bg={formColorBox} spacing={4} borderRadius=".5rem">
+      <HStack bg={formColorBox} spacing={4} borderRadius=".5rem" justify="space-between" w="full">
         <Box>
           Añada una tarea
         </Box>

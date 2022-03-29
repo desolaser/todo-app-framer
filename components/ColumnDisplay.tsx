@@ -2,31 +2,43 @@ import React from 'react';
 import { 
   Box, 
   Heading,
-  Stack,
+  VStack,
+  HStack,
+  IconButton,
   useColorModeValue, 
 } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 import Todo from '../model/Todo';
 import Column from '../model/Column';
 import TodoDisplay from './TodoDisplay';
 import AddTodoForm from './AddTodoForm';
-
+import useColumn from '../hooks/useColumn';
 interface ColumnProps {
   column: Column,
   todos: Todo[]
 };
 
 const Task: React.FC<ColumnProps> = ({ column, todos }) => {
+  const { handleRemove } = useColumn();
   const boxColorBox = useColorModeValue('gray.200', 'gray.700');
 
   return (
-    <Box p="1rem" bg={boxColorBox} rounded="lg">
-      <Heading as="h4" size="md" mb="1rem">
-        {column.title}
-      </Heading>
-      <Stack spacing={3}>
+    <Box p="1rem" bg={boxColorBox} rounded="lg" minWidth="xs">
+      <HStack justify="space-between" mb="1rem">
+        <Heading as="h4" size="md" isTruncated>
+          {column.title}
+        </Heading>
+        <IconButton       
+          size='md'
+          onClick={_ => handleRemove(column.id)}
+          aria-label='Delete button'
+          icon={<DeleteIcon/>}
+        />
+      </HStack>
+      <VStack spacing={4}>
         {todos.map(todo => <TodoDisplay key={todo.id} todo={todo} columnId={column.id} /> )}
-      </Stack>
-      <AddTodoForm columnId={column.id} />
+        <AddTodoForm columnId={column.id} />
+      </VStack>
     </Box>
   );
 }
