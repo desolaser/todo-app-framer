@@ -94,9 +94,11 @@ const todoSlice = createSlice({
     },
     swapColumn: (state, action: PayloadAction<SwapColumnPayload>) => {
       const { columnId, sourceIndex, destinationIndex } = action.payload;
-
-      state.columnOrder.splice(sourceIndex, 1);
-      state.columnOrder.splice(destinationIndex, 0, columnId);
+      console.log(columnId, sourceIndex, destinationIndex)
+      const aux = state.columnOrder[destinationIndex]
+      state.columnOrder[destinationIndex] = state.columnOrder[sourceIndex]
+      state.columnOrder[sourceIndex] = aux
+      console.log(state.columnOrder[destinationIndex], state.columnOrder[sourceIndex])
     }
   },
 });
