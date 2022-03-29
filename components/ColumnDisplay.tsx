@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Box, 
-  Heading,
+  Text,
   VStack,
   HStack,
   IconButton,
@@ -25,9 +25,9 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
   return (
     <Box p="1rem" bg={boxColorBox} rounded="lg" minWidth="xs">
       <HStack justify="space-between" mb="1rem">
-        <Heading as="h4" size="md" isTruncated>
+        <Text noOfLines={3} style={{ textOverflow: "ellipsis" }} maxWidth="xs">
           {column.title}
-        </Heading>
+        </Text>
         <IconButton       
           size='md'
           onClick={_ => handleRemove(column.id)}
