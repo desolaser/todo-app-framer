@@ -19,13 +19,14 @@ import useTodo from '../hooks/useTodo';
 import EditTaskForm from './EditTaskForm';
 
 interface TaskProps {
+  index: number,
   todo: Todo,
   columnId: string
 };
 
-const Task: React.FC<TaskProps> = ({ todo, columnId }) => {
+const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
   const boxColorItem = useColorModeValue('gray.300', 'gray.600');
-  const [editMode, setEditMode] = useState<boolean>(false);
+  const [ editMode, setEditMode ] = useState<boolean>(false);
   const { handleComplete, handleRemove } = useTodo(columnId);
 
   const toogleEditMode = () => {

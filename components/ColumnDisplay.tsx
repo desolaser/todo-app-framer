@@ -8,11 +8,14 @@ import {
   useColorModeValue, 
 } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
+import { Droppable } from 'react-beautiful-dnd';
 import Todo from '../model/Todo';
 import Column from '../model/Column';
 import TodoDisplay from './TodoDisplay';
 import AddTodoForm from './AddTodoForm';
 import useColumn from '../hooks/useColumn';
+
+
 interface ColumnProps {
   column: Column,
   todos: Todo[]
@@ -35,10 +38,19 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
           icon={<DeleteIcon/>}
         />
       </HStack>
-      <VStack spacing={4}>
-        {todos.map(todo => <TodoDisplay key={todo.id} todo={todo} columnId={column.id} /> )}
-        <AddTodoForm columnId={column.id} />
-      </VStack>
+      <Droppable droppableId={column.id}>
+        {provided => (          
+          <VStack 
+            {...provided.droppableProps}
+            ref={provided.innerRef}          
+            spacing={4}
+          >
+            {todos.map((todo, index) => <TodoDisplay key={todo.id} index={index} todo={todo} columnId={column.id} /> )}
+            {provided.placeholder}
+            <AddTodoForm columnId={column.id} />
+          </VStack>
+        )}
+      </Droppable>
     </Box>
   );
 }
