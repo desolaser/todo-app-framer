@@ -25,7 +25,8 @@ interface TaskProps {
 };
 
 const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
-  const boxColorItem = useColorModeValue('gray.300', 'gray.600');
+  const boxColor = useColorModeValue('gray.300', 'gray.600');
+  const boxDraggingColor = useColorModeValue('gray.200', 'gray.500');
   const [ editMode, setEditMode ] = useState<boolean>(false);
   const { handleComplete, handleRemove } = useTodo(columnId);
 
@@ -35,12 +36,13 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
 
   return (
     <Draggable draggableId={todo.id} index={index}>
-      {provided => (
+      {(provided, snapshot) => (
         <Box 
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          p="1rem" bg={boxColorItem} maxWidth="xs" minWidth="xs"
+          bgColor={snapshot.isDragging ? boxDraggingColor : boxColor}
+          p="1rem" maxWidth="xs" minWidth="xs"
         >
           {!editMode ? (
             <HStack mb="1rem" spacing={8} justify="space-between">

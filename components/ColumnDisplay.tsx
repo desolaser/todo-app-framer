@@ -22,23 +22,32 @@ interface ColumnProps {
 
 const Task: React.FC<ColumnProps> = ({ column, todos }) => {
   const { handleRemove } = useColumn();
-  const boxColorBox = useColorModeValue('gray.200', 'gray.700');
+  const boxColor = useColorModeValue('gray.200', 'gray.700');
+  const boxDragginOverColor = useColorModeValue('blue.300', 'blue.200');
+  const textColor = useColorModeValue('black', 'white');
+  const textDraggingOverColor = useColorModeValue('white', 'black');
 
   return (
-    <Box p="1rem" bg={boxColorBox} rounded="lg" minWidth="xs">
-      <HStack justify="space-between" mb="1rem">
-        <Text style={{ textOverflow: "ellipsis" }} isTruncated maxWidth="xs">
-          {column.title}
-        </Text>
-        <IconButton
-          size='md'
-          onClick={_ => handleRemove(column.id)}
-          aria-label='Delete button'
-          icon={<DeleteIcon/>}
-        />
-      </HStack>
-      <Droppable droppableId={column.id}>
-        {provided => (
+    <Droppable droppableId={column.id}>
+      {(provided, snapshot) => (
+        <Box 
+          p="1rem" rounded="lg" minWidth="xs"
+          bgColor={snapshot.isDraggingOver ? boxDragginOverColor : boxColor}
+        >
+          <HStack justify="space-between" mb="1rem">
+            <Text
+              color={snapshot.isDraggingOver ? textDraggingOverColor : textColor}
+              style={{ textOverflow: "ellipsis" }} isTruncated maxWidth="xs"
+            >
+              {column.title}
+            </Text>
+            <IconButton
+              size='md'
+              onClick={_ => handleRemove(column.id)}
+              aria-label='Delete button'
+              icon={<DeleteIcon/>}
+            />
+          </HStack>
           <VStack 
             {...provided.droppableProps}
             ref={provided.innerRef}
@@ -48,9 +57,9 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
             {provided.placeholder}
             <AddTodoForm columnId={column.id} />
           </VStack>
-        )}
-      </Droppable>
-    </Box>
+        </Box>
+      )}
+    </Droppable>
   );
 }
 
