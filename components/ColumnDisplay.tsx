@@ -29,7 +29,7 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
         {column.title}
       </Heading>
       <Stack spacing={3}>
-        {todos.map(todo => <TodoDisplay key={todo.id} todo={todo} /> )}
+        {todos.map(todo => <TodoDisplay key={todo.id} todo={todo} columnId={column.id} /> )}
       </Stack>
       <HStack>
         <Box>
