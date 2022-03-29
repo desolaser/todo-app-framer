@@ -16,7 +16,7 @@ interface EditTaskFormProps {
 }
 
 const EditTaskForm: React.FC<EditTaskFormProps> = ({ todo, setEditMode }) => {
-  const { handleEdit } = useTodo();
+  const { handleEdit } = useTodo('');
   const editForm = useFormik({
     initialValues: {
       title: todo.title,
