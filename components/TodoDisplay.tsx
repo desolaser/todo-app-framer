@@ -15,17 +15,17 @@ import {
   EditIcon
 } from '@chakra-ui/icons';
 import Todo from '../model/Todo';
-import EditTaskForm from '../components/EditTaskForm';
+import EditTaskForm from './EditTaskForm';
+import useTodo from '../hooks/useTodo';
 
 interface TaskProps {
-  todo: Todo,
-  handleComplete: (taskId: string) => void,
-  handleRemove: (taskId: string) => void
+  todo: Todo
 };
 
-const Task: React.FC<TaskProps> = ({ todo, handleComplete, handleRemove }) => {
+const Task: React.FC<TaskProps> = ({ todo }) => {
   const boxColorItem = useColorModeValue('gray.300', 'gray.600');
   const [editMode, setEditMode] = useState<boolean>(false);
+  const { handleComplete, handleRemove } = useTodo();
 
   const toogleEditMode = () => {
     setEditMode(!editMode);
