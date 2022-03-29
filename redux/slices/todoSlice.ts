@@ -1,22 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import Todo from "../../model/Todo";
-
-const initialState: Todo[] = [];
+import Column from "../../model/Column";
 
 const todoSlice = createSlice({
   name: 'todo',
-  initialState,
+  initialState: {
+    todos: [] as Todo[],
+    columns: [] as Column[],
+    columnOrder: [] as string[]
+  },
   reducers: {
-    add: (state, action: PayloadAction<Todo>) => [...state, action.payload],
+    add: (state, action: PayloadAction<Todo>) => 
+      { state.todos = [...state.todos, action.payload] },
     remove: (state, action: PayloadAction<string>) => 
-      state.filter(todo => todo.id !== action.payload),
+      { state.todos = state.todos.filter(todo => todo.id !== action.payload) },
     done: (state, action: PayloadAction<string>) => 
-      state.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo),
-    edit: (state, action: PayloadAction<EditTodoPayload>) => 
-      state.map(todo => todo.id === action.payload.id ? { ...todo, title: action.payload.title, description: action.payload.description } : todo),
-    setTodos: (state, action: PayloadAction<Todo[]>) => 
-      [...action.payload],
+      { state.todos = state.todos.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo) },      
+    edit: (state, action: PayloadAction<EditTodoPayload>) => { 
+      state.todos = state.todos.map(todo => todo.id === action.payload.id ? { 
+        ...todo, 
+        title: action.payload.title, 
+        description: action.payload.description 
+      } : todo)
+    },
+    setTodos: (state, action: PayloadAction<Todo[]>) => { state.todos = action.payload }
   },
 });
 
@@ -28,6 +36,3 @@ export type EditTodoPayload = {
   description: string;
 }
 export default todoSlice.reducer;
-
-
- 

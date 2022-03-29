@@ -7,7 +7,7 @@ import { makeId } from '../lib/stringUtils';
 
 const useTodo = () => {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector(state => state.todo);
+  const todos = useAppSelector(state => state.todo.todos);
   const formik = useFormik({
     initialValues: {
       title: '',
