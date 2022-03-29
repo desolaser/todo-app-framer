@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import Todo from "../../model/Todo";
 import Column from "../../model/Column";
@@ -16,6 +16,14 @@ type RemovePayload = {
 type EditColumnPayload = {
   columnId: string,
   title: string
+}
+
+type SwapTodoPayload = {
+  todoId: string,
+  sourceColumnId: string, 
+  destinationColumnId: string, 
+  sourceIndex: number, 
+  destinationIndex: number
 }
 
 const todoSlice = createSlice({
@@ -64,10 +72,24 @@ const todoSlice = createSlice({
       columns: state.columns.filter(column => column.id != action.payload),
       columnOrder: state.columnOrder.filter(columnId => columnId != action.payload)
     }),
+    swapTodo: (state, action: PayloadAction<SwapTodoPayload>) => {
+      const { todoId, sourceColumnId, destinationColumnId, sourceIndex, destinationIndex } = action.payload;      
+      let sourceColumn: Column | undefined = state.columns.filter(column => column.id === sourceColumnId)[0];
+      if (typeof sourceColumn === "undefined") {
+        return;
+      }
+      let destinationColumn: Column | undefined = state.columns.filter(column => column.id === destinationColumnId)[0];
+      if (typeof destinationColumn === "undefined") {
+        return;
+      }
+
+      sourceColumn.todoIds.splice(sourceIndex, 1);
+      destinationColumn.todoIds.splice(destinationIndex, 0, todoId);
+    }
   },
 });
 
-export const { add, remove, done, edit, addColumn, editColumn, removeColumn } = todoSlice.actions;
+export const { add, remove, done, edit, addColumn, editColumn, removeColumn, swapTodo } = todoSlice.actions;
 export const selectTodos = (state: RootState) => state.todo;
 export type EditTodoPayload = {
   id: string;
