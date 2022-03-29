@@ -5,43 +5,45 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { add, edit, done, remove } from '../redux/slices/todoSlice';
 import { makeId } from '../lib/stringUtils';
 
-const useTodo = () => {
+const useTodo = (columnId: string) => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector(state => state.todo.todos);
-  const formik = useFormik({
+
+  const addTodoForm = useFormik({
     initialValues: {
-      title: '',
-      description: ''
+      title: ''
     },
     validate: values => { 
       let errors = {};
-
       if (!values.title)
         errors = { title: "El titulo es obligatorio" };
-      if (!values.description)
-        errors = { ...errors, description: "La descripción es obligatoria" };
-
       return errors;
     },
     onSubmit: values => {
       const todo: Todo = {
         id: generateUniqueId(),
         title: values.title,
-        description: values.description,
+        description: '',
         isDone: false,
         date: new Date()
       }
   
-      dispatch(add(todo));
+      dispatch(add({
+        todo,
+        columnId
+      }));
     },
   });
  
-  const handleComplete = (taskId: string): void => {
-    dispatch(done(taskId));
+  const handleComplete = (todoId: string): void => {
+    dispatch(done(todoId));
   }
 
-  const handleRemove = (taskId: string): void => {
-    dispatch(remove(taskId));
+  const handleRemove = (todoId: string): void => {
+    dispatch(remove({
+      todoId,
+      columnId
+    }));
   }
 
   const handleEdit = (id: string, title: string, description: string) => {    
@@ -60,7 +62,7 @@ const useTodo = () => {
 
   return {
     todos,
-    formik,
+    addTodoForm,
     handleComplete,
     handleRemove,
     handleEdit
