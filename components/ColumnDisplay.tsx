@@ -19,7 +19,7 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
   const boxColorBox = useColorModeValue('gray.200', 'gray.700');
 
   return (
-    <Box p="1rem" bg={boxColorBox} rounded="xl">
+    <Box p="1rem" bg={boxColorBox} rounded="lg">
       <Heading as="h4" size="md" mb="1rem">
         {column.title}
       </Heading>
