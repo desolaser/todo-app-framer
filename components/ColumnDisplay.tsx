@@ -15,7 +15,6 @@ import TodoDisplay from './TodoDisplay';
 import AddTodoForm from './AddTodoForm';
 import useColumn from '../hooks/useColumn';
 
-
 interface ColumnProps {
   column: Column,
   todos: Todo[]
@@ -31,7 +30,7 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
         <Text style={{ textOverflow: "ellipsis" }} isTruncated maxWidth="xs">
           {column.title}
         </Text>
-        <IconButton       
+        <IconButton
           size='md'
           onClick={_ => handleRemove(column.id)}
           aria-label='Delete button'
@@ -39,10 +38,10 @@ const Task: React.FC<ColumnProps> = ({ column, todos }) => {
         />
       </HStack>
       <Droppable droppableId={column.id}>
-        {provided => (          
+        {provided => (
           <VStack 
             {...provided.droppableProps}
-            ref={provided.innerRef}          
+            ref={provided.innerRef}
             spacing={4}
           >
             {todos.map((todo, index) => <TodoDisplay key={todo.id} index={index} todo={todo} columnId={column.id} /> )}
