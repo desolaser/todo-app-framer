@@ -1,3 +1,4 @@
+import React from 'react';
 import { 
   FormControl, 
   Input,
@@ -7,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import useTodo from '../hooks/useTodo';
 
-const AddTaskForm = () => {
+const AddTaskForm: React.FC = () => {
   const { formik } = useTodo();
 
   return (
