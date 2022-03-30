@@ -14,7 +14,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <Container maxW="container.xl">
       <Flex>
-        <Heading p="1rem">Todo-app</Heading>
+        <Heading p="1rem">Trollo</Heading>
         <Spacer />
         <Switch p="2rem" id='color-mode' onChange={toggleColorMode} />
       </Flex>
