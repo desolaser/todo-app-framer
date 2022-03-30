@@ -16,6 +16,7 @@ const AddColumnForm: React.FC = () => {
   const { addColumnForm } = useColumn();  
   const [ addMode, setAddMode ] = useState<boolean>(false);
   const formColorBox = useColorModeValue('gray.100', 'gray.700');
+  const inputColor = useColorModeValue('gray.100', 'gray.900');
 
   if (addMode) {
     return (
@@ -23,7 +24,7 @@ const AddColumnForm: React.FC = () => {
         <form onSubmit={addColumnForm.handleSubmit}>
           <FormControl mb="1rem" isInvalid={'title' in addColumnForm.errors}>
             <Textarea 
-              bg={useColorModeValue('gray.100', 'gray.900')}
+              bg={inputColor}
               placeholder="Insert text"
               name="title"
               value={addColumnForm.values.title}

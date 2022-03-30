@@ -20,6 +20,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
   const { addTodoForm } = useTodo(columnId);
   const [ addMode, setAddMode ] = useState<boolean>(false);
   const formColorBox = useColorModeValue('gray.100', 'gray.700');
+  const inputColor = useColorModeValue('gray.100', 'gray.900');
 
   if (addMode) {
     return (
@@ -27,7 +28,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
         <form onSubmit={addTodoForm.handleSubmit}>
           <FormControl mb="1rem" isInvalid={'title' in addTodoForm.errors}>
             <Textarea 
-              bg={useColorModeValue('gray.100', 'gray.900')}
+              bg={inputColor}
               placeholder="Insert text"
               name="title"
               value={addTodoForm.values.title}
