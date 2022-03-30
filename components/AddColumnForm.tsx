@@ -34,7 +34,7 @@ const AddColumnForm: React.FC = () => {
           </FormControl>
           <HStack justify="space-between">
             <Button colorScheme={'blue'} type="submit" w="full">
-              Agregar
+              Add
             </Button>
             <IconButton aria-label='Close card button' icon={<CloseIcon />} onClick={() => setAddMode(!addMode)} />
           </HStack>
@@ -50,7 +50,7 @@ const AddColumnForm: React.FC = () => {
         justify="space-between"
       >
         <Box>
-          Añada una columna
+          Add column
         </Box>
         <IconButton aria-label='Add card button' icon={<AddIcon />} onClick={() => setAddMode(!addMode)} />
       </HStack>

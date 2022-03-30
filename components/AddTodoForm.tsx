@@ -38,7 +38,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
           </FormControl>
           <HStack>
             <Button colorScheme={'blue'} type="submit" w="full">
-              Agregar
+              Add
             </Button>
             <IconButton aria-label='Close card button' icon={<CloseIcon />} onClick={() => setAddMode(!addMode)} />
           </HStack>

@@ -59,7 +59,7 @@ const EditTodoForm: React.FC<EditTodoFormProps> = ({ todo, setEditMode }) => {
           <FormErrorMessage>{editForm.errors.description}</FormErrorMessage>}
       </FormControl>
       <Button colorScheme="blue" type="submit" w="full" mb="1rem">
-        Guardar
+        Save
       </Button>
     </form>
   );
