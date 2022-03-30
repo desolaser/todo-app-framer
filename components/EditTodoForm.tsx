@@ -38,7 +38,6 @@ const EditTodoForm: React.FC<EditTodoFormProps> = ({ todo, setEditMode }) => {
 
   return (
     <form onSubmit={editForm.handleSubmit} style={{ width: '100%' }}>
-      <Input type="hidden" name="id" value={todo.id} />
       <FormControl mb="1rem" isInvalid={'title' in editForm.errors}>
         <Input 
           placeholder="Insert text"
