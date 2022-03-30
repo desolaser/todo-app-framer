@@ -16,7 +16,7 @@ import {
 import { Draggable } from 'react-beautiful-dnd';
 import Todo from '../model/Todo';
 import useTodo from '../hooks/useTodo';
-import EditTaskForm from './EditTaskForm';
+import EditTodoForm from './EditTodoForm';
 
 interface TaskProps {
   index: number,
@@ -57,7 +57,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
               {todo.isDone && <CheckIcon />}
             </HStack>
           ) : (
-            <EditTaskForm todo={todo} setEditMode={setEditMode} />
+            <EditTodoForm todo={todo} setEditMode={setEditMode} />
           )}
           <HStack justify="space-between">
             <IconButton

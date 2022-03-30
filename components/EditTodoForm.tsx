@@ -10,12 +10,12 @@ import {
 import useTodo from '../hooks/useTodo';
 import Todo from '../model/Todo';
 
-interface EditTaskFormProps {
+interface EditTodoFormProps {
   todo: Todo,
   setEditMode: (value: boolean) => void
 }
 
-const EditTaskForm: React.FC<EditTaskFormProps> = ({ todo, setEditMode }) => {
+const EditTodoForm: React.FC<EditTodoFormProps> = ({ todo, setEditMode }) => {
   const { handleEdit } = useTodo('');
   const editForm = useFormik({
     initialValues: {
@@ -27,8 +27,6 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({ todo, setEditMode }) => {
 
       if (!values.title)
         errors = { title: "El titulo es obligatorio" };
-      if (!values.description)
-        errors = { ...errors, description: "La descripción es obligatoria" };
 
       return errors;
     },
@@ -68,4 +66,4 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({ todo, setEditMode }) => {
   );
 }
 
-export default EditTaskForm;
+export default EditTodoForm;

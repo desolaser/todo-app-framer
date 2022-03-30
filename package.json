@@ -1,5 +1,5 @@
 {
-  "name": "todo-app-framer",
+  "name": "trollo-app",
   "private": true,
   "scripts": {
     "dev": "next dev",
