@@ -47,12 +47,9 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
     )
   } else {
     return (
-      <HStack bg={formColorBox} spacing={4} p={2} borderRadius=".5rem" justify="space-between" w="full">
-        <Box>
-          Añada una tarea
-        </Box>
-        <IconButton aria-label='Add card button' icon={<AddIcon />} onClick={() => setAddMode(!addMode)} />
-      </HStack>
+      <Button leftIcon={<AddIcon />} onClick={() => setAddMode(!addMode)} w="full">
+        Add card button
+      </Button>
     )
   }
 }
