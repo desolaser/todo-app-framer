@@ -7,7 +7,7 @@ import { makeId } from '../lib/stringUtils';
 
 const useTodo = (columnId: string) => {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector(state => state.todo.todos);
+  const todos = useAppSelector(state => state.root.todo.todos);
 
   const addTodoForm = useFormik({
     initialValues: {
