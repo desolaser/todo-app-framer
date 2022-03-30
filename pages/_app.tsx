@@ -7,7 +7,7 @@ import store from '../redux/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const onDragEnd = (result: DropResult) => {
-    const { draggableId, source, destination } = result;
+    const { draggableId, source, destination, type } = result;
     if (!destination) 
       return;
 
@@ -18,9 +18,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       return;
     }
 
-    if (draggableId.startsWith('column')) {
+    if (type === 'column') {
       store.dispatch({ type: 'todo/swapColumn', payload: {
-        columnId: draggableId,
         sourceIndex: source.index, 
         destinationIndex: destination.index
       }})

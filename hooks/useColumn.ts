@@ -21,8 +21,9 @@ const useColumn = () => {
       return errors;
     },
     onSubmit: values => {
+      const id = generateUniqueId()
       const column: Column = {
-        id: generateUniqueId(),
+        id: id,
         title: values.title,
         todoIds: []
       }
@@ -63,6 +64,7 @@ const useColumn = () => {
 
   return {
     columns,
+    columnOrder,
     addColumnForm,
     handleRemove,
     handleEdit,
