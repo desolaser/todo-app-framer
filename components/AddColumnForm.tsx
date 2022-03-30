@@ -9,7 +9,7 @@ import {
   IconButton,
   useColorModeValue
 } from '@chakra-ui/react';
-import { PlusSquareIcon, CloseIcon } from '@chakra-ui/icons';
+import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import useColumn from '../hooks/useColumn';
 
 const AddColumnForm: React.FC = () => {
@@ -52,7 +52,7 @@ const AddColumnForm: React.FC = () => {
         <Box>
           Añada una columna
         </Box>
-        <IconButton aria-label='Add card button' icon={<PlusSquareIcon />} onClick={() => setAddMode(!addMode)} />
+        <IconButton aria-label='Add card button' icon={<AddIcon />} onClick={() => setAddMode(!addMode)} />
       </HStack>
     )
   }

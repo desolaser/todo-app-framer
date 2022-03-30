@@ -9,7 +9,7 @@ import {
   IconButton,
   useColorModeValue
 } from '@chakra-ui/react';
-import { PlusSquareIcon, CloseIcon } from '@chakra-ui/icons';
+import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import useTodo from '../hooks/useTodo';
 
 interface AddTodoFormProps {
@@ -51,7 +51,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
         <Box>
           Añada una tarea
         </Box>
-        <IconButton aria-label='Add card button' icon={<PlusSquareIcon />} onClick={() => setAddMode(!addMode)} />
+        <IconButton aria-label='Add card button' icon={<AddIcon />} onClick={() => setAddMode(!addMode)} />
       </HStack>
     )
   }
