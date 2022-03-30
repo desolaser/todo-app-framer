@@ -9,7 +9,6 @@ import Todo from '../model/Todo';
 const useColumn = () => {
   const dispatch = useAppDispatch();
   const { todos, columns, columnOrder } = useAppSelector(state => state.root.todo);
-
   const addColumnForm = useFormik({
     initialValues: {
       title: ''
@@ -21,12 +20,12 @@ const useColumn = () => {
       return errors;
     },
     onSubmit: values => {
-      const id = generateUniqueId()
+      const id = generateUniqueId();
       const column: Column = {
         id: id,
         title: values.title,
         todoIds: []
-      }
+      };
       
       dispatch(addColumn(column));
     },
@@ -43,7 +42,7 @@ const useColumn = () => {
   const getOrderedColumns = () => {
     return columnOrder.map((columnId: string) => {
       const column: Column = columns.filter(column => column.id == columnId)[0];
-      const todosList: Todo[] = column.todoIds.map(todoId => todos.filter(todo => todo.id === todoId)[0] )
+      const todosList: Todo[] = column.todoIds.map(todoId => todos.filter(todo => todo.id === todoId)[0]);
 
       return {
         column,
@@ -69,7 +68,7 @@ const useColumn = () => {
     handleRemove,
     handleEdit,
     getOrderedColumns
-  }
+  };
 }
 
 export default useColumn;

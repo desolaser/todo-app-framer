@@ -15,7 +15,7 @@ import todoReducer from './slices/todoSlice';
 const persistConfig = {
   key: 'auth',
   storage
-}
+};
 
 const rootReducer = persistCombineReducers(persistConfig, {
   todo: todoReducer,
@@ -31,7 +31,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-})
+});
 
 const persistor = persistStore(store);
 

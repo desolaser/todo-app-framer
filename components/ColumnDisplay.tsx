@@ -78,8 +78,7 @@ const ColumnDisplay: React.FC<ColumnProps> = ({ index, column, todos }) => {
                         </MenuList>
                       </Menu>
                     </>                   
-                  )}
-                  
+                  )}                  
                 </HStack>
                 <VStack 
                   {...provided.droppableProps}

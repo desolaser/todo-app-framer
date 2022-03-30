@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import Todo from "../../model/Todo";
 import Column from "../../model/Column";
@@ -6,17 +6,17 @@ import Column from "../../model/Column";
 type AddPayload = {
   todo: Todo,
   columnId: string
-}
+};
 
 type RemovePayload = {
   todoId: string,
   columnId: string
-}
+};
 
 type EditColumnPayload = {
   columnId: string,
   title: string
-}
+};
 
 type SwapTodoPayload = {
   todoId: string,
@@ -24,12 +24,12 @@ type SwapTodoPayload = {
   destinationColumnId: string, 
   sourceIndex: number, 
   destinationIndex: number
-}
+};
 
 type SwapColumnPayload = {
   sourceIndex: number, 
   destinationIndex: number
-}
+};
 
 const todoSlice = createSlice({
   name: 'todo',
@@ -118,5 +118,5 @@ export type EditTodoPayload = {
   id: string;
   title: string;
   description: string;
-}
+};
 export default todoSlice.reducer;

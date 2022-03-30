@@ -8,7 +8,6 @@ import { makeId } from '../lib/stringUtils';
 const useTodo = (columnId: string) => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector(state => state.root.todo.todos);
-
   const addTodoForm = useFormik({
     initialValues: {
       title: ''
@@ -26,7 +25,7 @@ const useTodo = (columnId: string) => {
         description: '',
         isDone: false,
         date: new Date()
-      }
+      };
   
       dispatch(add({
         todo,
@@ -66,7 +65,7 @@ const useTodo = (columnId: string) => {
     handleComplete,
     handleRemove,
     handleEdit
-  }
+  };
 }
 
 export default useTodo;

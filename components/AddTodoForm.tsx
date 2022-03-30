@@ -45,13 +45,13 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
           </HStack>
         </form>
       </Box>
-    )
+    );
   } else {
     return (
       <Button leftIcon={<AddIcon />} onClick={() => setAddMode(!addMode)} w="full">
         Add card button
       </Button>
-    )
+    );
   }
 }
 

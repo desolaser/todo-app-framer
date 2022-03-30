@@ -41,7 +41,7 @@ const AddColumnForm: React.FC = () => {
           </HStack>
         </form>
       </Box>
-    )
+    );
   } else {
     return (
       <HStack 
@@ -55,7 +55,7 @@ const AddColumnForm: React.FC = () => {
         </Box>
         <IconButton aria-label='Add card button' icon={<AddIcon />} onClick={() => setAddMode(!addMode)} />
       </HStack>
-    )
+    );
   }
 }
 
