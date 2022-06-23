@@ -5,7 +5,7 @@ The typical todo app, but with trello features. Never done before!
 Now seriously talking (or writing), i plan to do a trello clone with a
 similar architecture that was used on the real Trello, but instead of backbone.js
 i plan to use next.js, instead of CoffeeScript i will use TypeScript and i
-want to throw kubernetes to the mix, for load balancing and server scalation. 
+want to throw kubernetes to the mix, for load balancing and server scalation.
 
 Even when there's a lot of things that i have to come up with, because the
 architecture isn't explicitly described.
@@ -21,6 +21,12 @@ Here are the links to the blogs:
 * [The Trello Tech Stack 2016](https://blog.trello.com/the-trello-tech-stack)
 * [Why We Chose Kafka For The Trello Socket Architecture](https://tech.trello.com/why-we-chose-kafka/) (I haven't read this yet, but i will)
 
+Extra:
+
+This could be useful to know.
+
+* [Redis as an LRU cache](http://oldblog.antirez.com/post/redis-as-LRU-cache.html)
+
 ## Features
 
 In this section you will find the features that are already on production.
@@ -33,8 +39,9 @@ In this section you will find the features that are already on production.
 ## TODO
 
 - Login system
-- Sub tasks inside todos
-- Animations for buttons
+- Sub tasks inside todos (Checklists)
+- Animations for buttons (Because it will be boring without effects, and i don't know very much about animations)
+- Real-time update between the client and database.
 
 There is a lot of features that i haven't considered yet, but i have to start
 with the basics.
