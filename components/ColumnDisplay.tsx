@@ -69,10 +69,10 @@ const ColumnDisplay: React.FC<ColumnProps> = ({ index, column, todos }) => {
                           variant='outline'
                         />
                         <MenuList>
-                          <MenuItem onClick={_ => setEditMode(!editMode)} icon={<EditIcon />}>
+                          <MenuItem onClick={() => setEditMode(!editMode)} icon={<EditIcon />}>
                             Edit
                           </MenuItem>
-                          <MenuItem onClick={_ => handleRemove(column.id)} icon={<DeleteIcon />}>
+                          <MenuItem onClick={() => handleRemove(column.id)} icon={<DeleteIcon />}>
                             Delete
                           </MenuItem>
                         </MenuList>

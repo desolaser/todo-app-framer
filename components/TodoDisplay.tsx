@@ -62,7 +62,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
           <HStack justify="space-between">
             <IconButton
               size='md'
-              onClick={_ => handleComplete(todo.id)}
+              onClick={() => handleComplete(todo.id)}
               colorScheme={todo.isDone ? 'red' : 'green'}
               aria-label='Check button'
               icon={todo.isDone ? <CloseIcon/> : <CheckIcon />}
@@ -70,7 +70,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
             <HStack spacing={4}>
               <IconButton
                 size='md'
-                onClick={_ => handleRemove(todo.id)}
+                onClick={() => handleRemove(todo.id)}
                 colorScheme='red'
                 aria-label='Delete button'
                 icon={<DeleteIcon/>}
@@ -78,7 +78,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
               <IconButton       
                 size='md'
                 mt={2} 
-                onClick={_ => toogleEditMode()}
+                onClick={() => toogleEditMode()}
                 colorScheme='blue'
                 aria-label='Edit button'
                 icon={<EditIcon/>}
