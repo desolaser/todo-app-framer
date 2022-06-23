@@ -1,22 +1,16 @@
 import React from 'react';
 import { 
-  Container, 
-  Heading,
+  Container,
   Flex,
-  Spacer,
-  Switch,
-  useColorMode, 
 } from '@chakra-ui/react';
+import Navbar from './Navbar';
 
 const Layout: React.FC = ({ children }) => {
-  const { toggleColorMode } = useColorMode();
 
   return (
     <Container maxW="container.xl">
       <Flex>
-        <Heading p="1rem">Trollo</Heading>
-        <Spacer />
-        <Switch p="2rem" id='color-mode' onChange={toggleColorMode} />
+        <Navbar />
       </Flex>
       {children}
     </Container>
