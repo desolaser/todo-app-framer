@@ -25,7 +25,7 @@ const AddColumnForm: React.FC = () => {
           <FormControl mb="1rem" isInvalid={'title' in addColumnForm.errors}>
             <Textarea 
               bg={inputColor}
-              placeholder="Insert text"
+              placeholder="Insert column title"
               name="title"
               value={addColumnForm.values.title}
               onChange={addColumnForm.handleChange}
@@ -37,7 +37,7 @@ const AddColumnForm: React.FC = () => {
             <Button aria-label='add-column' colorScheme={'blue'} type="submit" w="full">
               Add
             </Button>
-            <IconButton aria-label='Close card button' icon={<CloseIcon />} onClick={() => setAddMode(!addMode)} />
+            <IconButton aria-label="close-add-column-mode" icon={<CloseIcon />} onClick={() => setAddMode(!addMode)} />
           </HStack>
         </form>
       </Box>
@@ -53,7 +53,7 @@ const AddColumnForm: React.FC = () => {
         <Box>
           Add column
         </Box>
-        <IconButton aria-label='Add card button' icon={<AddIcon />} onClick={() => setAddMode(!addMode)} />
+        <IconButton aria-label="open-add-column-mode" icon={<AddIcon />} onClick={() => setAddMode(!addMode)} />
       </HStack>
     );
   }

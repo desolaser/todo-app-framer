@@ -29,7 +29,7 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
           <FormControl mb="1rem" isInvalid={'title' in addTodoForm.errors}>
             <Textarea 
               bg={inputColor}
-              placeholder="Insert text"
+              placeholder="Insert todo title"
               name="title"
               value={addTodoForm.values.title}
               onChange={addTodoForm.handleChange}
@@ -38,18 +38,18 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ columnId }) => {
               <FormErrorMessage>{addTodoForm.errors.title}</FormErrorMessage>}            
           </FormControl>
           <HStack>
-            <Button colorScheme={'blue'} type="submit" w="full">
+            <Button aria-label='add-todo' colorScheme={'blue'} type="submit" w="full">
               Add
             </Button>
-            <IconButton aria-label='Close card button' icon={<CloseIcon />} onClick={() => setAddMode(!addMode)} />
+            <IconButton aria-label='close-add-todo-mode' icon={<CloseIcon />} onClick={() => setAddMode(!addMode)} />
           </HStack>
         </form>
       </Box>
     );
   } else {
     return (
-      <Button leftIcon={<AddIcon />} onClick={() => setAddMode(!addMode)} w="full">
-        Add card button
+      <Button aria-label="open-add-todo-mode" leftIcon={<AddIcon />} onClick={() => setAddMode(!addMode)} w="full">
+        Add todo
       </Button>
     );
   }
