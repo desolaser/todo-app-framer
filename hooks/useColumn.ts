@@ -8,7 +8,7 @@ import Todo from '../model/Todo';
 
 const useColumn = () => {
   const dispatch = useAppDispatch();
-  const { todos, columns, columnOrder } = useAppSelector(state => state.root.todo);
+  const { todos, columns, columnOrder } = useAppSelector(state => state.todo);
   const addColumnForm = useFormik({
     initialValues: {
       title: ''
