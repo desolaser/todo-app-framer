@@ -34,7 +34,7 @@ const AddColumnForm: React.FC = () => {
               <FormErrorMessage>{addColumnForm.errors.title}</FormErrorMessage>}            
           </FormControl>
           <HStack justify="space-between">
-            <Button colorScheme={'blue'} type="submit" w="full">
+            <Button aria-label='add-column' colorScheme={'blue'} type="submit" w="full">
               Add
             </Button>
             <IconButton aria-label='Close card button' icon={<CloseIcon />} onClick={() => setAddMode(!addMode)} />
