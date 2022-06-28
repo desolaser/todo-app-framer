@@ -15,7 +15,7 @@ const useTodo = (columnId: string) => {
     validate: values => { 
       let errors = {};
       if (!values.title)
-        errors = { title: "El titulo es obligatorio" };
+        errors = { title: "Title is required" };
       return errors;
     },
     onSubmit: (values, { resetForm }) => {
