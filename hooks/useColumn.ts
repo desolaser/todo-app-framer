@@ -19,7 +19,7 @@ const useColumn = () => {
         errors = { title: "El titulo es obligatorio" };
       return errors;
     },
-    onSubmit: values => {
+    onSubmit: (values, { resetForm }) => {
       const id = generateUniqueId();
       const column: Column = {
         id: id,
@@ -28,6 +28,7 @@ const useColumn = () => {
       };
       
       dispatch(addColumn(column));
+      resetForm();
     },
   });
 

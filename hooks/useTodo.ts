@@ -18,7 +18,7 @@ const useTodo = (columnId: string) => {
         errors = { title: "El titulo es obligatorio" };
       return errors;
     },
-    onSubmit: values => {
+    onSubmit: (values, { resetForm }) => {
       const todo: Todo = {
         id: generateUniqueId(),
         title: values.title,
@@ -31,6 +31,7 @@ const useTodo = (columnId: string) => {
         todo,
         columnId
       }));
+      resetForm();
     },
   });
  
