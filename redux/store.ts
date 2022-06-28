@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import type { PreloadedState } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { 
   persistStore, 
@@ -17,28 +18,24 @@ const persistConfig = {
   storage
 };
 
-const rootReducer = persistCombineReducers(persistConfig, {
+export const rootReducer = persistCombineReducers(persistConfig, {
   todo: todoReducer,
 });
 
-const store = configureStore({
-  reducer: {
-    root: rootReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-});
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
+  });
+}
 
-const persistor = persistStore(store);
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
-export default store;
-export {
-  persistor
-};
+export const persistor = persistStore(setupStore());
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];

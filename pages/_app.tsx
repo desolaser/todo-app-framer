@@ -4,7 +4,9 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import store, { persistor } from '../redux/store';
+import { setupStore, persistor } from '../redux/store';
+
+const store = setupStore()
 
 function MyApp({ Component, pageProps }: AppProps) {
   const onDragEnd = (result: DropResult) => {
