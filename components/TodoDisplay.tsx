@@ -72,7 +72,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
                 size='md'
                 onClick={() => handleRemove(todo.id)}
                 colorScheme='red'
-                aria-label='Delete button'
+                aria-label='delete-todo-button'
                 icon={<DeleteIcon/>}
               />
               <IconButton       
@@ -80,7 +80,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
                 mt={2} 
                 onClick={() => toogleEditMode()}
                 colorScheme='blue'
-                aria-label='Edit button'
+                aria-label='edit-todo-button'
                 icon={<EditIcon/>}
               />
             </HStack>
