@@ -119,7 +119,7 @@ const todoSlice = createSlice({
 });
 
 export const { add, remove, done, edit, addColumn, editColumn, removeColumn, swapTodo } = todoSlice.actions;
-export const selectTodos = (state: RootState) => state.root.todo.todos;
+export const selectTodos = (state: RootState) => state.todo.todos;
 export type EditTodoPayload = {
   id: string;
   title: string;
