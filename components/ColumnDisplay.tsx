@@ -64,9 +64,9 @@ const ColumnDisplay: React.FC<ColumnProps> = ({ index, column, todos }) => {
                       <Menu>
                         <MenuButton
                           as={IconButton}
-                          aria-label='Options'
                           icon={<HamburgerIcon />}
                           variant='outline'
+                          aria-label='options'
                         />
                         <MenuList>
                           <MenuItem onClick={() => setEditMode(!editMode)} icon={<EditIcon />}>
