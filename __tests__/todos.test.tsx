@@ -4,7 +4,7 @@ import { onDragEnd } from "../lib/beautifulDnD";
 import { setupStore } from '../redux/store';
 import type { AppStore } from '../redux/store';
 import { add, addColumn } from "../redux/slices/todoSlice";
-import { render, screen, within, act } from "../utils/test-utils";
+import { render, screen, within, act, fireEvent } from "../utils/test-utils";
 import Home from "../pages/index";
 import Column from "../model/Column";
 import Todo from "../model/Todo";
@@ -202,5 +202,40 @@ describe("Test todos functionalities", () => {
     expect(todos).toHaveLength(2);
     expect(todos[0].innerHTML).toEqual("Todo test 1");
     expect(todos[1].innerHTML).toEqual("Todo test 2");
+  });
+
+  it ("It should remove todo 2", async () => {
+    const removeTodoButtons = screen.getAllByLabelText<HTMLButtonElement>("delete-todo-button");
+    await act(async () => {
+      fireEvent.click(removeTodoButtons[1]);
+    });
+    
+    const renderedTodos = screen.queryAllByText(/Todo test/i);
+    expect(renderedTodos).toHaveLength(1);
+    expect(renderedTodos[0].innerHTML).toEqual("Todo test 1");
+  });
+
+  it ("It should edit todo 2", async () => {
+    const editTodoButtons = screen.getAllByLabelText<HTMLButtonElement>("edit-todo-button");
+    await act(async () => {
+      fireEvent.click(editTodoButtons[1]);
+    });
+    
+    const titleInput = screen.getByPlaceholderText<HTMLInputElement>("Change todo title");
+    const descriptionInput = screen.getByPlaceholderText<HTMLInputElement>("Change todo description");
+    await act(async () => {
+      fireEvent.change(titleInput, { target: { value: "Todo test 2 edited" } });
+      fireEvent.change(descriptionInput, { target: { value: "Task 2 description" } });
+    });
+    expect(titleInput.value).toEqual("Todo test 2 edited");
+    expect(descriptionInput.value).toEqual("Task 2 description");
+
+    const saveButton = screen.getByText<HTMLButtonElement>("Save");
+    await act(async () => {
+      fireEvent.click(saveButton);
+    });
+    
+    expect(screen.getByText("Todo test 2 edited")).toBeInTheDocument();
+    expect(screen.getByText("Task 2 description")).toBeInTheDocument();
   });
 });
