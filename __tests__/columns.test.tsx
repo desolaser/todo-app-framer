@@ -8,7 +8,7 @@ import { render, screen, act } from "../utils/test-utils";
 import Home from "../pages/index";
 import Column from "../model/Column";
 
-describe("Test board page", () => {
+describe("Test columns functionalities", () => {
   let store: AppStore | null = null;
 
   beforeEach(() => {
