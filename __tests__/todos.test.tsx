@@ -204,6 +204,19 @@ describe("Test todos functionalities", () => {
     expect(todos[1].innerHTML).toEqual("Todo test 2");
   });
 
+  it ("It should completed todo 2", async () => {
+    const completeTodoButtons = screen.getAllByLabelText<HTMLButtonElement>("complete-todo");
+    let completedSymbol = screen.queryByLabelText("completed");
+    expect(completedSymbol).toBeNull();
+
+    await act(async () => {
+      fireEvent.click(completeTodoButtons[1]);
+    });
+    
+    completedSymbol = screen.queryByLabelText("completed");
+    expect(completedSymbol).toBeInTheDocument();
+  });
+
   it ("It should remove todo 2", async () => {
     const removeTodoButtons = screen.getAllByLabelText<HTMLButtonElement>("delete-todo-button");
     await act(async () => {
