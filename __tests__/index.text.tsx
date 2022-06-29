@@ -56,12 +56,12 @@ describe("Test board page", () => {
   it("Should not create a column if title field is empty", async () => {
     // Activates add mode
     act(() => {
-      const addModeButton = screen.getByLabelText<HTMLButtonElement>('Add card button');
+      const addModeButton = screen.getByLabelText<HTMLButtonElement>('open-add-column-mode');
       fireEvent.click(addModeButton);
     });
     
     //Write the column name and checks if the value is changed
-    const columnNameInput = screen.getByPlaceholderText<HTMLInputElement>('Insert text');
+    const columnNameInput = screen.getByPlaceholderText<HTMLInputElement>('Insert column title');
     expect(columnNameInput.value).toEqual("");
 
     const addColumnButton = screen.getByLabelText("add-column");
