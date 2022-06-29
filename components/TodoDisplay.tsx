@@ -54,7 +54,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
                   {todo.description}
                 </Text>    
               </VStack>
-              {todo.isDone && <CheckIcon />}
+              {todo.isDone && <CheckIcon aria-label="completed" />}
             </HStack>
           ) : (
             <EditTodoForm todo={todo} setEditMode={setEditMode} />
@@ -64,7 +64,7 @@ const Task: React.FC<TaskProps> = ({ index, todo, columnId }) => {
               size='md'
               onClick={() => handleComplete(todo.id)}
               colorScheme={todo.isDone ? 'red' : 'green'}
-              aria-label='Check button'
+              aria-label='complete-todo'
               icon={todo.isDone ? <CloseIcon/> : <CheckIcon />}
             />
             <HStack spacing={4}>
