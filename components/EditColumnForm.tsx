@@ -44,7 +44,7 @@ const EditColumnForm: React.FC<EditColumnFormProps> = ({ column, setEditMode }) 
       <HStack spacing={4}>
         <FormControl isInvalid={'title' in editForm.errors}>
           <Input 
-            placeholder="Insert column title"
+            placeholder="Change column title"
             name="title"
             bgColor={formColorBox}
             value={editForm.values.title}
@@ -53,7 +53,7 @@ const EditColumnForm: React.FC<EditColumnFormProps> = ({ column, setEditMode }) 
           {'title' in editForm.errors && 
             <FormErrorMessage>{editForm.errors.title}</FormErrorMessage>}
         </FormControl>
-        <Button type="submit">
+        <Button aria-label="save-column" type="submit">
           <Icon as={AiFillSave} />
         </Button>
       </HStack>
