@@ -64,9 +64,9 @@ const ColumnDisplay: React.FC<ColumnProps> = ({ index, column, todos }) => {
                       <Menu>
                         <MenuButton
                           as={IconButton}
-                          aria-label='Options'
                           icon={<HamburgerIcon />}
                           variant='outline'
+                          aria-label='options'
                         />
                         <MenuList>
                           <MenuItem onClick={() => setEditMode(!editMode)} icon={<EditIcon />}>
@@ -84,6 +84,7 @@ const ColumnDisplay: React.FC<ColumnProps> = ({ index, column, todos }) => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   spacing={4}
+                  role={column.id}
                 >
                   {todos.map((todo, index) => <TodoDisplay key={todo.id} index={index} todo={todo} columnId={column.id} /> )}
                   {provided.placeholder}

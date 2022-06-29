@@ -7,7 +7,7 @@ import { makeId } from '../lib/stringUtils';
 
 const useTodo = (columnId: string) => {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector(state => state.root.todo.todos);
+  const todos = useAppSelector(state => state.todo.todos);
   const addTodoForm = useFormik({
     initialValues: {
       title: ''
@@ -15,10 +15,10 @@ const useTodo = (columnId: string) => {
     validate: values => { 
       let errors = {};
       if (!values.title)
-        errors = { title: "El titulo es obligatorio" };
+        errors = { title: "Title is required" };
       return errors;
     },
-    onSubmit: values => {
+    onSubmit: (values, { resetForm }) => {
       const todo: Todo = {
         id: generateUniqueId(),
         title: values.title,
@@ -31,6 +31,7 @@ const useTodo = (columnId: string) => {
         todo,
         columnId
       }));
+      resetForm();
     },
   });
  

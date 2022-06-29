@@ -8,7 +8,7 @@ import Todo from '../model/Todo';
 
 const useColumn = () => {
   const dispatch = useAppDispatch();
-  const { todos, columns, columnOrder } = useAppSelector(state => state.root.todo);
+  const { todos, columns, columnOrder } = useAppSelector(state => state.todo);
   const addColumnForm = useFormik({
     initialValues: {
       title: ''
@@ -16,10 +16,10 @@ const useColumn = () => {
     validate: values => { 
       let errors = {};
       if (!values.title)
-        errors = { title: "El titulo es obligatorio" };
+        errors = { title: "Title is required" };
       return errors;
     },
-    onSubmit: values => {
+    onSubmit: (values, { resetForm }) => {
       const id = generateUniqueId();
       const column: Column = {
         id: id,
@@ -28,6 +28,7 @@ const useColumn = () => {
       };
       
       dispatch(addColumn(column));
+      resetForm();
     },
   });
 
