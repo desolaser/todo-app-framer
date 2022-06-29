@@ -40,7 +40,7 @@ const EditTodoForm: React.FC<EditTodoFormProps> = ({ todo, setEditMode }) => {
     <form onSubmit={editForm.handleSubmit} style={{ width: '100%' }}>
       <FormControl mb="1rem" isInvalid={'title' in editForm.errors}>
         <Input 
-          placeholder="Insert text"
+          placeholder="Change todo title"
           name="title"
           value={editForm.values.title}
           onChange={editForm.handleChange}
@@ -50,7 +50,7 @@ const EditTodoForm: React.FC<EditTodoFormProps> = ({ todo, setEditMode }) => {
       </FormControl>
       <FormControl mb="1rem" isInvalid={'description' in editForm.errors}>
         <Textarea 
-          placeholder="Insert description"
+          placeholder="Change todo description"
           name="description"
           value={editForm.values.description}
           onChange={editForm.handleChange}
@@ -58,7 +58,7 @@ const EditTodoForm: React.FC<EditTodoFormProps> = ({ todo, setEditMode }) => {
         {'description' in editForm.errors && 
           <FormErrorMessage>{editForm.errors.description}</FormErrorMessage>}
       </FormControl>
-      <Button colorScheme="blue" type="submit" w="full" mb="1rem">
+      <Button aria-label="save-todo-change" colorScheme="blue" type="submit" w="full" mb="1rem">
         Save
       </Button>
     </form>
