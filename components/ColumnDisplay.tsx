@@ -84,6 +84,7 @@ const ColumnDisplay: React.FC<ColumnProps> = ({ index, column, todos }) => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   spacing={4}
+                  role={column.id}
                 >
                   {todos.map((todo, index) => <TodoDisplay key={todo.id} index={index} todo={todo} columnId={column.id} /> )}
                   {provided.placeholder}
