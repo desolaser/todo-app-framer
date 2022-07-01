@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { 
+  Heading,
   Box, 
   VStack, 
   Button, 
@@ -22,7 +23,10 @@ const SignUp = () => {
       </Head>
       <Center mt="8rem">
         <form onSubmit={signUpForm.handleSubmit}>
-          <VStack w="xl" p={4} bgColor={boxValue} rounded={4}>
+          <VStack w="xl" p={4} bgColor={boxValue} rounded={4}> 
+            <Heading>
+              Sign up
+            </Heading>
             <InputField
               label="Email"
               name="email"
