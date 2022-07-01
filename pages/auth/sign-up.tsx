@@ -42,7 +42,7 @@ const SignUp = () => {
             <InputField
               label="Password"
               name="password"
-              type="text"
+              type="password"
               value={signUpForm.values.password}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.password}
@@ -50,7 +50,7 @@ const SignUp = () => {
             <InputField
               label="Password Confirmation"
               name="passwordConfirmation"
-              type="text"
+              type="password"
               value={signUpForm.values.passwordConfirmation}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.passwordConfirmation}
