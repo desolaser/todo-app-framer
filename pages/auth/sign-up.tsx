@@ -30,6 +30,7 @@ const SignUp = () => {
               value={signUpForm.values.email}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.email}
+              isRequired={true}
             />
             <InputField
               label="Email Confirmation"
@@ -38,6 +39,7 @@ const SignUp = () => {
               value={signUpForm.values.emailConfirmation}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.emailConfirmation}
+              isRequired={true}
             />
             <InputField
               label="Password"
@@ -46,6 +48,7 @@ const SignUp = () => {
               value={signUpForm.values.password}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.password}
+              isRequired={true}
             />
             <InputField
               label="Password Confirmation"
@@ -54,6 +57,7 @@ const SignUp = () => {
               value={signUpForm.values.passwordConfirmation}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.passwordConfirmation}
+              isRequired={true}
             />
             <Button type="submit" colorScheme="blue">
               Register
