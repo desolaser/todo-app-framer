@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import SingUp from "../../pages/auth/sign-up";
+import SignUp from "../../pages/auth/sign-up";
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent, act } from "../../utils/test-utils";
 import { setupStore } from '../../redux/store';
@@ -17,7 +17,7 @@ describe("Sign in page tests", () => {
 
   beforeEach(() => {
     store = setupStore();
-    render(<SingUp />, { store });
+    render(<SignUp />, { store });
 
     emailInput = screen.getByLabelText<HTMLInputElement>('email');
     emailConfirmationInput = screen.getByLabelText<HTMLInputElement>('email-confirmation');
@@ -52,7 +52,7 @@ describe("Sign in page tests", () => {
       fireEvent.click(registerButton);
     });
 
-    expect(screen.getByText(/Successful sign in/i)).toBeInTheDocument();
+    expect(screen.getByText(/Successful sign up/i)).toBeInTheDocument();
   });
 
   it("It should not sign in if all fields are empty", async () => {
@@ -75,59 +75,11 @@ describe("Sign in page tests", () => {
       fireEvent.click(registerButton);
     });
 
-    expect(screen.getByText(/Failed sign in/i)).toBeInTheDocument();
+    expect(screen.getByText(/Failed sign up/i)).toBeInTheDocument();
     expect(screen.getByText(/Email field is required/i)).toBeInTheDocument();
     expect(screen.getByText(/Email confirmation field is required/i)).toBeInTheDocument();
     expect(screen.getByText(/Password field is required/i)).toBeInTheDocument();
     expect(screen.getByText(/Password confirmation field is required/i)).toBeInTheDocument();
-  });
-
-  it("It should not sign in if email field isn't filled", async () => {
-    const email: string = "";
-    const password: string = "Aa693341480++--";
-
-    act(() => {
-      fireEvent.change(emailInput, { target: { value: email } });
-      fireEvent.change(emailConfirmationInput, { target: { value: email } });
-      fireEvent.change(passwordInput, { target: { value: password } });
-      fireEvent.change(passwordConfirmationInput, { target: { value: password } });
-    });
-    expect(emailInput.value).toEqual(email);
-    expect(emailConfirmationInput.value).toEqual(email);
-    expect(passwordInput.value).toEqual(password);
-    expect(passwordConfirmationInput.value).toEqual(password);
-    
-    const registerButton = screen.getByText<HTMLButtonElement>('Register');
-    act(() => {
-      fireEvent.click(registerButton);
-    });
-
-    expect(screen.getByText(/Failed sign in/i)).toBeInTheDocument();
-    expect(screen.getByText(/Email field is required/i)).toBeInTheDocument();
-    expect(screen.getByText(/Email confirmation field is required/i)).toBeInTheDocument();
-  });
-
-  it("It should not sign in if email field is filled and email confirmation is not", async () => {
-    const password: string = "Aa693341480++--";
-
-    act(() => {
-      fireEvent.change(emailInput, { target: { value: "test@test.cl" } });
-      fireEvent.change(emailConfirmationInput, { target: { value: "" } });
-      fireEvent.change(passwordInput, { target: { value: password } });
-      fireEvent.change(passwordConfirmationInput, { target: { value: password } });
-    });
-    expect(emailInput.value).toEqual("test@test.cl");
-    expect(emailConfirmationInput.value).toEqual("");
-    expect(passwordInput.value).toEqual(password);
-    expect(passwordConfirmationInput.value).toEqual(password);
-    
-    const registerButton = screen.getByText<HTMLButtonElement>('Register');
-    act(() => {
-      fireEvent.click(registerButton);
-    });
-
-    expect(screen.getByText(/Failed sign in/i)).toBeInTheDocument();
-    expect(screen.getByText(/Email confirmation field is required/i)).toBeInTheDocument();
   });
 
   it("It should not sign in if email and email confirmation fields are different", async () => {
@@ -149,7 +101,7 @@ describe("Sign in page tests", () => {
       fireEvent.click(registerButton);
     });
 
-    expect(screen.getByText(/Failed sign in/i)).toBeInTheDocument();
+    expect(screen.getByText(/Failed sign up/i)).toBeInTheDocument();
     expect(screen.getByText(/Email confirmation and Email fields are different/i)).toBeInTheDocument();
   });
 
@@ -172,7 +124,7 @@ describe("Sign in page tests", () => {
       fireEvent.click(registerButton);
     });
 
-    expect(screen.getByText(/Failed sign in/i)).toBeInTheDocument();
+    expect(screen.getByText(/Failed sign up/i)).toBeInTheDocument();
     expect(screen.getByText(/Password confirmation is required/i)).toBeInTheDocument();
   });
 
@@ -195,7 +147,7 @@ describe("Sign in page tests", () => {
       fireEvent.click(registerButton);
     });
 
-    expect(screen.getByText(/Failed sign in/i)).toBeInTheDocument();
+    expect(screen.getByText(/Failed sign up/i)).toBeInTheDocument();
     expect(screen.getByText(/Password confirmation and password fields are different/i)).toBeInTheDocument();
   });
 
