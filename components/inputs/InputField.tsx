@@ -9,15 +9,16 @@ import {
 } from '@chakra-ui/react';
 
 type InputFieldProps = {  
-  label: string,
-  name: string, 
-  type: string, 
-  value: number | string, 
-  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  error: string, 
-  helpText: string,
-  disabled: boolean, 
-  children?: JSX.Element 
+  label: string;
+  name: string;
+  type: string;
+  value: number | string;
+  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
+  error: string | undefined;
+  helpText?: string;
+  disabled?: boolean;
+  children?: JSX.Element;
+  isRequired?: boolean;
 } 
 
 const InputField = ({ 
@@ -29,9 +30,10 @@ const InputField = ({
   error, 
   helpText,
   disabled, 
-  children 
+  children,
+  isRequired
 }: InputFieldProps) => (
-  <FormControl isRequired isInvalid={error !== ""}>
+  <FormControl isRequired={typeof isRequired != "undefined"} isInvalid={typeof error == "string"}>
     <FormLabel>{label}</FormLabel>
     {type == 'select' ? (
       <Select
@@ -57,7 +59,7 @@ const InputField = ({
         disabled={disabled}
       />
     )}
-    {error !== "" ? (
+    {typeof error !== "string" ? (
       helpText && <FormHelperText>{helpText}</FormHelperText>
     ) : (
       <FormErrorMessage>{error}</FormErrorMessage>
