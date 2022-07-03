@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Flex,
   HStack,
@@ -19,12 +20,16 @@ const Navbar = () => {
       </Heading>
       <Spacer />
       <HStack spacing={4}>
-        <Button>
-          Sign Up
-        </Button>
-        <Button>
-          Login
-        </Button>
+        <Link href="/auth/sign-up">
+          <Button>
+            Sign Up
+          </Button>
+        </Link>
+        <Link href="/auth/sign-in">
+          <Button>
+            Sign In
+          </Button>
+        </Link>
         <Switch p="2rem" id='color-mode' onChange={toggleColorMode} />
       </HStack>
     </Flex>

@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { setupStore, persistor } from '../redux/store';
 import { onDragEnd } from '../lib/beautifulDnD';
+import Layout from '../components/Layout';
 
 const store = setupStore()
 
@@ -15,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PersistGate persistor={persistor}>
         <ChakraProvider>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, store)}>
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </DragDropContext>
         </ChakraProvider>
       </PersistGate>
