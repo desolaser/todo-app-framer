@@ -34,7 +34,6 @@ const SignIn = () => {
               value={signInForm.values.email}
               onChange={signInForm.handleChange}
               error={signInForm.errors.email}
-              isRequired={true}
             />
             <InputField
               label="Password"
@@ -43,7 +42,6 @@ const SignIn = () => {
               value={signInForm.values.password}
               onChange={signInForm.handleChange}
               error={signInForm.errors.password}
-              isRequired={true}
             />
             <Button type="submit" colorScheme="blue">
               Register
