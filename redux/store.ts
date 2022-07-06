@@ -28,9 +28,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
+        serializableCheck: false
       }),
   });
 }
