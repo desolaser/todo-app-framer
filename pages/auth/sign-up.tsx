@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { 
   Heading,
   Box, 
@@ -34,7 +35,6 @@ const SignUp = () => {
               value={signUpForm.values.email}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.email}
-              isRequired={true}
             />
             <InputField
               label="Email Confirmation"
@@ -43,7 +43,6 @@ const SignUp = () => {
               value={signUpForm.values.emailConfirmation}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.emailConfirmation}
-              isRequired={true}
             />
             <InputField
               label="Password"
@@ -52,7 +51,6 @@ const SignUp = () => {
               value={signUpForm.values.password}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.password}
-              isRequired={true}
             />
             <InputField
               label="Password Confirmation"
@@ -61,8 +59,12 @@ const SignUp = () => {
               value={signUpForm.values.passwordConfirmation}
               onChange={signUpForm.handleChange}
               error={signUpForm.errors.passwordConfirmation}
-              isRequired={true}
             />
+            <Link passHref={true} href={'/auth/sign-in'}>
+              <Button as={'a'} variant={'link'} colorScheme={'blue'}>
+                You have an account already? Click here
+              </Button>
+            </Link>
             <Button type="submit" colorScheme="blue">
               Register
             </Button>
