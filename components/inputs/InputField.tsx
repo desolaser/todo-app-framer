@@ -34,10 +34,11 @@ const InputField = ({
   isRequired
 }: InputFieldProps) => (
   <FormControl isRequired={typeof isRequired != "undefined"} isInvalid={typeof error == "string"}>
-    <FormLabel>{label}</FormLabel>
+    <FormLabel htmlFor={name}>{label}</FormLabel>
     {type == 'select' ? (
       <Select
         name={name}
+        aria-label={name}
         value={value}
         onChange={onChange}
         disabled={disabled}>
@@ -46,6 +47,7 @@ const InputField = ({
     ) : type == 'textarea' ? (
       <Textarea
         name={name}
+        aria-label={name}
         value={value}
         onChange={onChange}
         disabled={disabled}
@@ -53,6 +55,7 @@ const InputField = ({
     ) : (
       <Input
         name={name}
+        aria-label={name}
         type={type}
         value={value}
         onChange={onChange}
