@@ -19,7 +19,7 @@ const SignUp = () => {
     <Box>
       <Head>
         <title>Trollo</title>
-        <meta name="description" content="Trollo application, very original app to save your todos" />
+        <meta name="description" content="Trollo application, very original app to save your todos and tasks like trello." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Center mt="8rem">
@@ -62,7 +62,7 @@ const SignUp = () => {
             />
             <Link passHref={true} href={'/auth/sign-in'}>
               <Button as={'a'} variant={'link'} colorScheme={'blue'}>
-                You have an account already? Click here
+                Do you have an account already? Click here
               </Button>
             </Link>
             <Button type="submit" colorScheme="blue">

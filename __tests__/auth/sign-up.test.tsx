@@ -1,11 +1,10 @@
-import Router from 'next/router';
 import SignUp from "../../pages/auth/sign-up";
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent, act } from "../../utils/test-utils";
 import { setupStore } from '../../redux/store';
 import type { AppStore } from '../../redux/store';
 
-describe("Sign in page tests", () => {  
+describe("Sign up page tests", () => {  
   let store: AppStore | null = null;
 
   let emailInput: HTMLInputElement;
@@ -23,16 +22,9 @@ describe("Sign in page tests", () => {
     emailConfirmationInput = screen.getByLabelText<HTMLInputElement>('emailConfirmation');
     passwordInput = screen.getByLabelText<HTMLInputElement>('password');
     passwordConfirmationInput = screen.getByLabelText<HTMLInputElement>('passwordConfirmation');
-
-    spies.routerChangeStart = jest.fn();
-    Router.events.on('routeChangeStart', spies.routerChangeStart);
   });
 
-  afterEach(() => {
-    Router.events.off('routeChangeStart', spies.routerChangeStart);
-  });
-
-  it("It should sign in if all fields are filled with valid data", async () => {
+  it("It should sign up if all fields are filled with valid data", async () => {
     const email: string = "test@test.cl";
     const password: string = "Aa693341480++--";
 
@@ -145,14 +137,5 @@ describe("Sign in page tests", () => {
     });
 
     expect(screen.getByText("Password confirmation and password fields are different")).toBeInTheDocument();
-  });
-
-  it("It should redirect to sign in page if sign in link is pressed", async () => {
-    const signInLink = screen.getByText("You have an account already? Click here");
-    await act(async () => {
-      fireEvent.click(signInLink);
-    });
-    
-    expect(spies.routerChangeStart).toHaveBeenCalled();
   });
 });

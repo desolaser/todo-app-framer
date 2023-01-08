@@ -18,7 +18,7 @@ const SignIn = () => {
     <Box>
       <Head>
         <title>Trollo</title>
-        <meta name="description" content="Trollo application, very original app to save your todos" />
+        <meta name="description" content="Trollo application, very original app to save your todos and tasks like trello." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Center mt="8rem">
@@ -44,7 +44,7 @@ const SignIn = () => {
               error={signInForm.errors.password}
             />
             <Button type="submit" colorScheme="blue">
-              Register
+              Login
             </Button>
           </VStack>
         </form>
